@@ -1,3 +1,9 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 
 ### STS ###
 .apt_generated
@@ -7,52 +13,25 @@
 .settings
 .springBeans
 .sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
-/build/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-/.idea/
-*#
-*.jar
-*.sw?
-*~
-.#*
-.*.md.html
-.DS_Store
-.gradle
-.metadata
-.recommenders
-.settings
-/code
-MANIFEST.MF
-_site/
-activemq-data
-bin
-build
-build.log
-dependency-reduced-pom.xml
-dump.rdb
-interpolated*.xml
-lib/
-log/
-logs/
-manifest.yml
-overridedb.*
-settings.xml
-target
-transaction-logs
-.flattened-pom.xml
-secrets.yml
-.gradletasknamecache
 
-!gradle/wrapper/gradle-wrapper.jar
+### VS Code ###
+.vscode/
