@@ -1,16 +1,36 @@
-FROM node:alpine
+# Build Stage
+FROM openjdk:11-jdk AS BUILDER
 
-# Create work directory
-WORKDIR /usr/src/app
+ENV APP_HOME=/app
 
-# Install runtime dependencies
-RUN npm install yarn -g
+WORKDIR $APP_HOME
 
-# Copy app source to work directory
-COPY . /usr/src/app
+COPY build.gradle settings.gradle gradlew ${APP_HOME}/
 
-# Install app dependencies
-RUN yarn install
+COPY gradle $APP_HOME/gradle
 
-# Build and run the app
-CMD npm start serve
+RUN ./gradlew build || return 0 
+
+COPY . .
+
+RUN ./gradlew build
+
+
+# Package stage
+FROM openjdk:11-jre
+
+VOLUME /tmp
+
+ARG JAR_FILE
+
+ENV APP_HOME=/app
+
+WORKDIR ${APP_HOME}
+
+COPY --from=BUILDER ${APP_HOME}/build/libs/${JAR_FILE} app.jar
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 CMD curl -f http://localhost:8080/api/example/actuator/health 2>&1 || exit 1
+
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]
