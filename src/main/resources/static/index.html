@@ -1,78 +1,28 @@
 <html>
-<head>
-    <style>
-        #messages {
-            text-align: left;
-            width: 50%;
-            padding: 1em;
-            border: 1px solid black;
-        }
-    </style>
-    <title>Sample WebSocket Client</title>
-</head>
 <body>
+
 <div class="container">
-    <div id="messages" class="messages"></div>
-    <div class="input-fields">
-        <p>Type a message and hit send:</p>
-        <input id="message"/>
-        <button id="send">Send</button>
+    <h1>A Demo for messaging in WebRTC</h1>
 
-        <p>Select an image and hit send:</p>
-        <input type="file" id="file" accept="image/*"/>
+    <h3>
+        Run two instances of this webpage along with the server to test this
+        application.<br> Create an offer, and then send the message. <br>Check
+        the browser console to see the output.
+    </h3>
 
-        <button id="sendImage">Send Image</button>
-    </div>
+    <!--WebRTC related code-->
+    <button type="button" class="btn btn-primary" onclick='createOffer()'>Create
+        Offer</button>
+    <input id="messageInput" type="text" class="form-control"
+           placeholder="message">
+    <button type="button" class="btn btn-primary" onclick='sendMessage()'>SEND</button>
+    <script src="client.js"></script>
+    <!--WebRTC related code-->
+
 </div>
+<div class="footer">This application is intentionally made simple
+    to avoid cluttering with non WebRTC related code.</div>
+
 </body>
-<script>
-    const messageWindow = document.getElementById("messages");
 
-    const sendButton = document.getElementById("send");
-    const messageInput = document.getElementById("message");
-
-    const fileInput = document.getElementById("file");
-    const sendImageButton = document.getElementById("sendImage");
-
-    const socket = new WebSocket("ws://localhost:8080/socket");
-    socket.binaryType = "arraybuffer";
-
-    socket.onopen = function (event) {
-        addMessageToWindow("Connected");
-    };
-
-    socket.onmessage = function (event) {
-        if (event.data instanceof ArrayBuffer) {
-            addMessageToWindow('Got Image:');
-            addImageToWindow(event.data);
-        } else {
-            addMessageToWindow(`Got Message: ${event.data}`);
-        }
-    };
-
-    sendButton.onclick = function (event) {
-        sendMessage(messageInput.value);
-        messageInput.value = "";
-    };
-
-    sendImageButton.onclick = function (event) {
-        let file = fileInput.files[0];
-        sendMessage(file);
-        fileInput.value = null;
-    };
-
-    function sendMessage(message) {
-        socket.send(message);
-        addMessageToWindow("Sent Message: " + message);
-    }
-
-    function addMessageToWindow(message) {
-        messageWindow.innerHTML += `<div>${message}</div>`
-    }
-
-    function addImageToWindow(image) {
-        let url = URL.createObjectURL(new Blob([image]));
-        messageWindow.innerHTML += `<img src="${url}"/>`
-    }
-</script>
 </html>
