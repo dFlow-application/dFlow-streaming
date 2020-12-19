@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DFlowApplication {
+public class DFlowStreamingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DFlowApplication.class, args);
+		SpringApplication.run(DFlowStreamingApplication.class, args);
 	}
 
 }

@@ -1,28 +1,17 @@
+<!DOCTYPE html>
 <html>
-<body>
+	<head>
+		<title>WebRTC Demo</title>
+		<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	</head>
+	<body onbeforeunload="disconnect();">
+		<div id="selectedVideosContainer">
+			<video id="remoteView"></video>
+			<video id="selfView"></video>
+		</div>
+		<div id="remoteVideosContainer"></div>
 
-<div class="container">
-    <h1>A Demo for messaging in WebRTC</h1>
-
-    <h3>
-        Run two instances of this webpage along with the server to test this
-        application.<br> Create an offer, and then send the message. <br>Check
-        the browser console to see the output.
-    </h3>
-
-    <!--WebRTC related code-->
-    <button type="button" class="btn btn-primary" onclick='createOffer()'>Create
-        Offer</button>
-    <input id="messageInput" type="text" class="form-control"
-           placeholder="message">
-    <button type="button" class="btn btn-primary" onclick='sendMessage()'>SEND</button>
-    <script src="client.js"></script>
-    <!--WebRTC related code-->
-
-</div>
-<div class="footer">This application is intentionally made simple
-    to avoid cluttering with non WebRTC related code.</div>
-
-</body>
-
+		<script src='/js/adapter-latest.js'></script>
+		<script src='/js/main.js'></script>
+	</body>
 </html>
