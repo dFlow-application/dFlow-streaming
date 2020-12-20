@@ -1,6 +1,6 @@
 package com.app.dflow.configuration;
 
-import com.app.dflow.DFlowApplication;
+import com.app.dflow.DFlowStreamingApplication;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -15,7 +15,7 @@ public class FirebaseInitialize {
     public void initialize() {
         try {
             FileInputStream serviceAccount =
-                    new FileInputStream(DFlowApplication.class.getResource("/serviceAccountKey.json").getFile());
+                    new FileInputStream(DFlowStreamingApplication.class.getResource("/serviceAccountKey.json").getFile());
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://dflow-f6552-default-rtdb.europe-west1.firebasedatabase.app")
