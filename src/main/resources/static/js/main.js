@@ -2,7 +2,7 @@ const PORT = 8443;
 const MAPPING = "/socket";
 const peerConnectionConfig = {
     'iceServers': [
-//        {'urls': 'stun:stun.l.google.com:19302'}
+        {'urls': 'stun:stun.l.google.com:19302'}
     ]
 };
 
@@ -129,7 +129,7 @@ function handleIce(signal) {
         console.log('Adding ice candidate');
         var connection = getRTCPeerConnectionObject(signal.sender);
         connection.addIceCandidate(new RTCIceCandidate(signal.data));
-    }
+    }getRTCPeerConnectionObject
 }
 
 function getRTCPeerConnectionObject(uuid) {
@@ -138,8 +138,8 @@ function getRTCPeerConnectionObject(uuid) {
         return connections[uuid];
     }
 
-//    var connection = new RTCPeerConnection(peerConnectionConfig);
-    var connection = new RTCPeerConnection();
+    var connection = new RTCPeerConnection(peerConnectionConfig);
+//    var connection = new RTCPeerConnection();
     connection.addStream(localStream);
 
     // handle on ice candidate
