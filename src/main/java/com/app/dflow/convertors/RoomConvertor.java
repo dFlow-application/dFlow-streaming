@@ -28,6 +28,6 @@ public class RoomConvertor {
 
         return new Room(room.getId(), room.getRoomIdentifier(),
                 room.getStatus(), room.getType(), subscribers,
-                owner, room.getMaxCapaciy(), room.getActualSize());
+                owner, room.getMaxCapacity(), room.getActualSize());
     }
 }
