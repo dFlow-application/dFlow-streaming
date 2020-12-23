@@ -15,6 +15,7 @@ public class SessionMessage {
     private String sender;
     private String receiver;
     private Object data;
+    private int roomId;
 
 //    public void setReceiver(String receiver) {
 //        this.receiver = HashConvertor.convertToHash(receiver);

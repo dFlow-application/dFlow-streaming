@@ -1,7 +1,6 @@
 package com.app.dflow.service;
 
 import com.app.dflow.constants.SubscriptionType;
-import com.app.dflow.convertors.HashConvertor;
 import com.app.dflow.object.SessionMessage;
 import com.app.dflow.utils.WebSocketUtils;
 import org.slf4j.Logger;
@@ -22,10 +21,12 @@ public class WebSocketService {
      */
     private Map<String, WebSocketSession> connections = new HashMap<>();
 
+    private Map<Integer, Map<String, WebSocketSession>> connections2 = new HashMap<>();
+
     public void handlerMessage(WebSocketSession session, TextMessage message) throws Exception {
         final SessionMessage sessionMessage = WebSocketUtils.getObject(message.getPayload());
         final String receiverUser = sessionMessage.getReceiver();
-        final WebSocketSession targetSession = connections.get(HashConvertor.convertToHash(receiverUser));
+        final WebSocketSession targetSession = connections.get(receiverUser);
 
         if (targetSession != null && targetSession.isOpen()) {
             sessionMessage.setSender(session.getId());
@@ -36,12 +37,12 @@ public class WebSocketService {
             try {
                 targetSession.sendMessage(new TextMessage(targetMessage));
             } catch (Exception e) {
-                LOG.warn("Error while sending the message.", e);
+                LOG.error("Error while sending the message.", e);
             }
         } else {
             LOG.warn("Session {} is closed. Received user {} is offline." +
                             "\n Fail to send message on session {} from sender user: {}.",
-                    targetSession.getId(), receiverUser, session.getId(), HashConvertor.convertToHash(session.getId()));
+                    targetSession.getId(), receiverUser, session.getId(), session.getId());
         }
 
     }
@@ -59,12 +60,13 @@ public class WebSocketService {
             }
         });
 
-        connections.put(HashConvertor.convertToHash(subscriber.getId()), subscriber);
+//        if (connections2.containsKey())
+        connections.put(subscriber.getId(), subscriber);
 
     }
 
     public void removeSubscriber(WebSocketSession subscriber) {
-        connections.remove(HashConvertor.convertToHash(subscriber.getId()));
+        connections.remove(subscriber.getId());
         disconnectSubscriber(subscriber);
     }
 
