@@ -37,7 +37,7 @@ public class WebSocketService {
             try {
                 targetSession.sendMessage(new TextMessage(targetMessage));
             } catch (Exception e) {
-                LOG.warn("Error while sending the message.", e);
+                LOG.error("Error while sending the message.", e);
             }
         } else {
             LOG.warn("Session {} is closed. Received user {} is offline." +

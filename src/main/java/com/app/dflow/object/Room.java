@@ -40,10 +40,8 @@ public class Room {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> subscribers;
 
-
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<User> owner;
+    @ManyToOne
+    private User owner;
 
     private int maxCapacity;
     private int actualSize;
