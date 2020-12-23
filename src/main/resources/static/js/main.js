@@ -30,6 +30,8 @@ function init() {
 		ws.onopen = logMessage;
 		ws.onclose = logMessage;
 		ws.onerror = logMessage;
+
+	    console.log("Stream OK2");
 	}).catch(function (error) {
 		console.log("Stream NOT OK: " + error.name + ': ' + error.message);
 	});
@@ -59,12 +61,14 @@ function processWsMessage(message) {
              break;
 	}
 
+	console.log("Stream OK3");
+
 }
 
 function handleInit(signal) {
     var peerId = signal.sender;
     var connection = getRTCPeerConnectionObject(peerId);
-
+console.log("Stream OK4");
     // make an offer, and send the SDP to sender.
     connection.createOffer().then(function (sdp) {
         connection.setLocalDescription(sdp);
@@ -72,12 +76,13 @@ function handleInit(signal) {
         sendMessage({
              type: "OFFER",
              receiver: peerId,
-             data: sdp
+             data: sdp,
+             roomId: 10
         });
     }).catch(function(e) {
         console.log('Error in offer creation.', e);
     });
-
+console.log("Stream OK5");
 }
 
 function handleLogout(signal) {
@@ -103,7 +108,8 @@ function handleOffer(signal) {
             sendMessage({
                 type: "ANSWER",
                 receiver: peerId,
-                data: sdp
+                data: sdp,
+                roomId: 10
             });
 
         }).catch(function(e) {
@@ -133,7 +139,7 @@ function handleIce(signal) {
 }
 
 function getRTCPeerConnectionObject(uuid) {
-
+console.log("Stream OK66");
     if(connections[uuid]) {
         return connections[uuid];
     }
@@ -149,7 +155,8 @@ function getRTCPeerConnectionObject(uuid) {
           sendMessage({
                 type: "ICE",
                 receiver: uuid,
-                data: event.candidate
+                data: event.candidate,
+                roomId: 10
               });
         }
     };
@@ -175,6 +182,7 @@ function getRTCPeerConnectionObject(uuid) {
 
     connections[uuid] = connection;
     return connection;
+    console.log("Stream OK77");
 }
 
 function setBigVideo(uuid) {
