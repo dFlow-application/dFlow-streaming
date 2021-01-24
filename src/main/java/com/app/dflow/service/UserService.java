@@ -2,7 +2,7 @@ package com.app.dflow.service;
 
 import com.app.dflow.convertors.UserConvertor;
 import com.app.dflow.dto.UserDTO;
-import com.app.dflow.object.User;
+import com.app.dflow.model.User;
 import com.app.dflow.repository.UserRepository;
 import com.app.dflow.template.IUserService;
 import org.slf4j.Logger;
@@ -74,4 +74,5 @@ public class UserService implements IUserService {
         LOG.warn("Bad request on adding user with id: {}.", userDTO.getId());
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
+
 }

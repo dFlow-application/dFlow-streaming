@@ -1,6 +1,6 @@
 package com.app.dflow.handler;
 
-import com.app.dflow.object.SessionMessage;
+import com.app.dflow.model.SessionMessage;
 import com.app.dflow.service.WebSocketService;
 import com.app.dflow.utils.WebSocketUtils;
 import org.slf4j.Logger;

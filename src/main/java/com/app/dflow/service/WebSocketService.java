@@ -1,7 +1,7 @@
 package com.app.dflow.service;
 
 import com.app.dflow.constants.SubscriptionType;
-import com.app.dflow.object.SessionMessage;
+import com.app.dflow.model.SessionMessage;
 import com.app.dflow.utils.WebSocketUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

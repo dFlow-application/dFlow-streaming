@@ -2,8 +2,8 @@ package com.app.dflow.convertors;
 
 import com.app.dflow.dto.RoomDTO;
 import com.app.dflow.dto.UserDTO;
-import com.app.dflow.object.Room;
-import com.app.dflow.object.User;
+import com.app.dflow.model.Room;
+import com.app.dflow.model.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
