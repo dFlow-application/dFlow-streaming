@@ -2,7 +2,7 @@ package com.app.dflow.service;
 
 import com.app.dflow.convertors.RoomConvertor;
 import com.app.dflow.dto.RoomDTO;
-import com.app.dflow.object.Room;
+import com.app.dflow.model.Room;
 import com.app.dflow.repository.RoomRepository;
 import com.app.dflow.template.IRoomService;
 import org.slf4j.Logger;

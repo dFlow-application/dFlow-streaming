@@ -1,6 +1,6 @@
 package com.app.dflow.utils;
 
-import com.app.dflow.object.SessionMessage;
+import com.app.dflow.model.SessionMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class WebSocketUtils {

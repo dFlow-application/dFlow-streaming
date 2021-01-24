@@ -1,7 +1,6 @@
-package com.app.dflow.object;
+package com.app.dflow.model;
 
-import com.app.dflow.constants.RoomStatus;
-import com.app.dflow.constants.RoomType;
+import com.app.dflow.constants.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,30 +18,24 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Table(name="ROOMS")
+@Table(name="USERS")
 @AllArgsConstructor
 @NoArgsConstructor
 @EnableAutoConfiguration
-public class Room {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String roomIdentifier;
-
-    @NotNull
-    private RoomStatus status;
-
-    @NotNull
-    private RoomType type;
-
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<User> subscribers;
+    private List<Room> rooms;
 
-    @ManyToOne
-    private User owner;
+    private UserType type;
 
-    private int maxCapacity;
-    private int actualSize;
+    @NotNull
+    private String username;
+
+    @NotNull
+    private String password;
 }
