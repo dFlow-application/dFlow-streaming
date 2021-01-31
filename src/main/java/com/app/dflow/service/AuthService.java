@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,8 +25,9 @@ public class AuthService {
 
     public String createAuthenticationToken(String username, String password) {
         try {
+            System.out.println(username + " " + password);
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
+                    new UsernamePasswordAuthenticationToken(username, new BCryptPasswordEncoder().encode(password))
             );
         } catch (Exception e) {
             LOG.error("Error while get create JWT token.", e);

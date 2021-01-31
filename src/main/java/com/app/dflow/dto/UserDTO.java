@@ -1,5 +1,6 @@
 package com.app.dflow.dto;
 
+import com.app.dflow.constants.AuthProvider;
 import com.app.dflow.constants.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,5 @@ public class UserDTO {
     private UserType type;
     private String username;
     private String password;
+    private AuthProvider auth_provider;
 }

@@ -1,5 +1,6 @@
 package com.app.dflow.model;
 
+import com.app.dflow.constants.AuthProvider;
 import com.app.dflow.constants.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,4 +39,7 @@ public class User {
 
     @NotNull
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private AuthProvider auth_provider;
 }
